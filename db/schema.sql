@@ -1,0 +1,10 @@
+CREATE DATABASE tasks_db;
+
+USE tasks_db;
+
+CREATE TABLE tasks(
+	id INTEGER AUTO_INCREMENT,
+    task VARCHAR(100),
+    done BOOLEAN DEFAULT FALSE,
+    PRIMARY KEY(id)
+)
