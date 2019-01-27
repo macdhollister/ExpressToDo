@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>To Do</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+    <style media="screen">
+        body {
+            background-color: #007bff;
+            text-align: center;
+        }
+
+        h1, h2 {
+            text-decoration: underline;
+        }
+
+        #task-input {
+            width: 50%;
+            margin: 30px auto;
+        }
+
+        .task-card {
+            background-color: transparent;
+            border-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header Row -->
+        <div class="row">
+            <div class="col">
+                <h1>To do</h1>
+            </div>
+        </div>
+
+        <!-- Task Display Row -->
+        <div class="row">
+            <!-- Unfinished Tasks -->
+            <div class="col-6">
+                <h2>Incomplete Tasks</h2>
+
+
+                <!-- Example Task Card -->
+                <div class="card task-card">
+                    <div class="card-body">
+                        Finish this assignment
+                        <a href="#!" class="btn btn-success">Mark Complete</a>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Finished Tasks -->
+            <div class="col-6">
+                <h2>Completed Tasks</h2>
+
+
+                <div class="card task-card">
+                    <div class="card-body">
+                        <a href="#!" class="btn btn-success">Mark Incomplete</a>
+                        Finish this assignment
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+        <!-- Input Row -->
+        <div class="row">
+            <div class="col">
+                <!-- Inputting a new task -->
+                <div class="input-group" id="task-input">
+                    <input type="text" class="form-control" placeholder="Enter a new task...">
+                    <div class="input-group-append">
+                        <button class="btn btn-success" type="button">Add New Task</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
