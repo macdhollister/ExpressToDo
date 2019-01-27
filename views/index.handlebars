@@ -1,0 +1,65 @@
+{{!-- <h1>Lunches for {{eater}}</h1>
+
+<ul>
+    {{#each foods }}
+    <li>{{lunch}}</li>
+    {{/each}}
+</ul> --}}
+
+<div class="container">
+    <!-- Header Row -->
+    <div class="row">
+        <div class="col">
+            <h1>To do</h1>
+        </div>
+    </div>
+
+    <!-- Task Display Row -->
+    <div class="row">
+        <!-- Unfinished Tasks -->
+        <div class="col-6">
+            <h2>Incomplete Tasks</h2>
+
+
+            <!-- Example Task Card -->
+            <div class="card task-card">
+                <div class="card-body">
+                    Finish this assignment
+                    <a href="#" class="btn btn-success">Mark Complete</a>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- Finished Tasks -->
+        <div class="col-6">
+            <h2>Completed Tasks</h2>
+
+
+            <div class="card task-card">
+                <div class="card-body">
+                    <a href="#" class="btn btn-success">Mark Incomplete</a>
+                    Finish this assignment
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+    <!-- Input Row -->
+    <div class="row">
+        <div class="col">
+            <!-- Inputting a new task -->
+            <div class="input-group" id="task-input">
+                <input type="text" class="form-control" placeholder="Enter a new task...">
+                <div class="input-group-append">
+                    <button class="btn btn-success" type="button">Add New Task</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

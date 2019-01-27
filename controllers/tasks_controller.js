@@ -4,8 +4,8 @@ const path = require('path');
 const task = require('./../models/task.js');
 
 router.get('/', (req, res) => {
-    // res.render(...)
-    res.sendFile(path.join(__dirname, './../views/test.html'))
+    res.render('index');
+    // res.sendFile(path.join(__dirname, './../views/test.html'))
 })
 
 router.post('/api/data', (req, res) => {
