@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
         crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style media="screen">
         body {
             background-color: #007bff;
@@ -41,7 +42,7 @@
         <!-- Task Display Row -->
         <div class="row">
             <!-- Unfinished Tasks -->
-            <div class="col-6">
+            <div class="col-6" id="incomplete-tasks">
                 <h2>Incomplete Tasks</h2>
 
 
@@ -49,7 +50,7 @@
                 <div class="card task-card">
                     <div class="card-body">
                         Finish this assignment
-                        <a href="#!" class="btn btn-success">Mark Complete</a>
+                        <a href="#!" class="btn btn-success mark-complete">Mark Complete</a>
                     </div>
                 </div>
 
@@ -57,14 +58,14 @@
             </div>
 
             <!-- Finished Tasks -->
-            <div class="col-6">
+            <div class="col-6" id="complete-tasks">
                 <h2>Completed Tasks</h2>
 
 
                 <div class="card task-card">
                     <div class="card-body">
-                        <a href="#" class="btn btn-success">Mark Incomplete</a>
                         Finish this assignment
+                        <a href="#" class="btn btn-success mark-incomplete">Mark Incomplete</a>
                     </div>
                 </div>
 
@@ -87,6 +88,26 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+        $(document).on('click', '.mark-complete', function() {
+            // do stuff to mark complete
+            $(this).text('Mark Incomplete');
+            $(this).removeClass('mark-complete').addClass('mark-incomplete');
+            $('#complete-tasks').append($(this).parent().parent().detach());
+
+            // send ajax call to mark this task complete
+        })
+
+        $(document).on('click', '.mark-incomplete', function() {
+            $(this).text('Mark Complete');
+            $(this).removeClass('mark-incomplete').addClass('mark-complete');
+            $('#incomplete-tasks').append($(this).parent().parent().detach());
+
+            // send ajax call to mark this task incomplete
+        })
+    </script>
 </body>
 
 </html>

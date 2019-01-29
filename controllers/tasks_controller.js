@@ -4,8 +4,27 @@ const path = require('path');
 const task = require('./../models/task.js');
 
 router.get('/', (req, res) => {
-    res.render('index');
-    // res.sendFile(path.join(__dirname, './../views/test.html'))
+    // get data from database
+    let tasks;
+    task.selectTasks((error, result) => {
+        // if (error) throw error;
+
+        tasks = result;
+        for (let i = 0; i < tasks.length; i++) {
+            tasks[i] = {
+                task: {
+                    id: tasks[i].id,
+                    text: tasks[i].task,
+                    done: tasks[i].done
+                }
+            }
+        }
+        console.log(tasks);
+        
+        res.render('index', {
+            tasks: tasks
+        })
+    })
 })
 
 router.post('/api/data', (req, res) => {

@@ -1,11 +1,3 @@
-{{!-- <h1>Lunches for {{eater}}</h1>
-
-<ul>
-    {{#each foods }}
-    <li>{{lunch}}</li>
-    {{/each}}
-</ul> --}}
-
 <div class="container">
     <!-- Header Row -->
     <div class="row">
@@ -17,34 +9,37 @@
     <!-- Task Display Row -->
     <div class="row">
         <!-- Unfinished Tasks -->
-        <div class="col-6">
+        <div class="col-6" id="incomplete-tasks">
             <h2>Incomplete Tasks</h2>
 
-
-            <!-- Example Task Card -->
-            <div class="card task-card">
-                <div class="card-body">
-                    Finish this assignment
-                    <a href="#" class="btn btn-success">Mark Complete</a>
-                </div>
-            </div>
-
+            {{#each tasks}}
+                {{!-- <div>{{task.text}}</div> --}}
+                {{#unless task.done}}
+                    <div class="card task-card">
+                        <div class="card-body">
+                            {{task.text}}
+                            <a href="#" class="btn btn-success mark-complete">Mark Complete</a>
+                        </div>
+                    </div>
+                {{/unless}}
+            {{/each}}
 
         </div>
 
         <!-- Finished Tasks -->
-        <div class="col-6">
+        <div class="col-6" id="complete-tasks">
             <h2>Completed Tasks</h2>
-
-
-            <div class="card task-card">
-                <div class="card-body">
-                    <a href="#" class="btn btn-success">Mark Incomplete</a>
-                    Finish this assignment
-                </div>
-            </div>
-
-
+            {{#each tasks}}
+                {{!-- <div>{{task.text}}</div> --}}
+                {{#if task.done}}
+                    <div class="card task-card">
+                        <div class="card-body">
+                            {{task.text}}
+                            <a href="#" class="btn btn-success mark-incomplete">Mark Incomplete</a>
+                        </div>
+                    </div>
+                {{/if}}
+            {{/each}}
 
         </div>
     </div>
@@ -63,3 +58,22 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).on('click', '.mark-complete', function() {
+        // do stuff to mark complete
+        $(this).text('Mark Incomplete');
+        $(this).removeClass('mark-complete').addClass('mark-incomplete');
+        $('#complete-tasks').append($(this).parent().parent().detach());
+
+        // send ajax call to mark this task complete
+    })
+
+    $(document).on('click', '.mark-incomplete', function() {
+        $(this).text('Mark Complete');
+        $(this).removeClass('mark-incomplete').addClass('mark-complete');
+        $('#incomplete-tasks').append($(this).parent().parent().detach());
+
+        // send ajax call to mark this task incomplete
+    })
+</script>
