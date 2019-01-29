@@ -18,7 +18,8 @@
                     <div class="card task-card">
                         <div class="card-body">
                             {{task.text}}
-                            <a href="#" class="btn btn-success mark-complete">Mark Complete</a>
+                            <a href="#" taskid={{task.id}} class="btn btn-success mark-complete">Mark Complete</a>
+                            <a href="#" taskid={{task.id}} class="btn btn-danger delete-task">Delete Task</a>
                         </div>
                     </div>
                 {{/unless}}
@@ -35,7 +36,8 @@
                     <div class="card task-card">
                         <div class="card-body">
                             {{task.text}}
-                            <a href="#" class="btn btn-success mark-incomplete">Mark Incomplete</a>
+                            <a href="#" taskid={{task.id}} class="btn btn-success mark-incomplete">Mark Incomplete</a>
+                            <a href="#" taskid={{task.id}} class="btn btn-danger delete-task">Delete Task</a>
                         </div>
                     </div>
                 {{/if}}
@@ -50,9 +52,9 @@
         <div class="col">
             <!-- Inputting a new task -->
             <div class="input-group" id="task-input">
-                <input type="text" class="form-control" placeholder="Enter a new task...">
+                <input type="text" class="form-control" id="new-task-text" placeholder="Enter a new task...">
                 <div class="input-group-append">
-                    <button class="btn btn-success" type="button">Add New Task</button>
+                    <button class="btn btn-success" type="button" id="new-task">Add New Task</button>
                 </div>
             </div>
         </div>
@@ -60,6 +62,7 @@
 </div>
 
 <script>
+
     $(document).on('click', '.mark-complete', function() {
         // do stuff to mark complete
         $(this).text('Mark Incomplete');
@@ -67,6 +70,10 @@
         $('#complete-tasks').append($(this).parent().parent().detach());
 
         // send ajax call to mark this task complete
+        $.ajax({
+            url: '/api/data/'+ $(this).attr('taskid') +'/done',
+            type: 'PUT'
+        })
     })
 
     $(document).on('click', '.mark-incomplete', function() {
@@ -75,5 +82,39 @@
         $('#incomplete-tasks').append($(this).parent().parent().detach());
 
         // send ajax call to mark this task incomplete
+        $.ajax({
+            url: '/api/data/'+ $(this).attr('taskid') +'/done',
+            type: 'PUT'
+        })
+    })
+
+    $(document).on('click', '#new-task', function() {
+        let newTask = $('#new-task-text').val();
+
+        if (newTask) {
+            $.ajax({
+                type: 'POST',
+                url: '/api/data',
+                data: {newTask: newTask},
+                success: function(result){
+                    console.log(result.id);//this will alert you the last_id
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+
+            location.reload();
+        }
+    })
+
+    $(document).on('click', '.delete-task', function() {
+        // delete from database
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/data/' + $(this).attr('taskid')+'/delete',
+        })
+        // remove from page
+        $(this).parent().parent().remove();
     })
 </script>

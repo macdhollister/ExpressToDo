@@ -19,8 +19,7 @@ router.get('/', (req, res) => {
                 }
             }
         }
-        console.log(tasks);
-        
+       
         res.render('index', {
             tasks: tasks
         })
@@ -28,7 +27,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/api/data', (req, res) => {
-    task.newTask(req);
+    task.newTask(req.body.newTask);
 })
 
 router.put('/api/data/:id/done', (req, res) => {
@@ -37,6 +36,10 @@ router.put('/api/data/:id/done', (req, res) => {
 
 router.put('/api/data/:id/task', (req, res) => {
     task.updateTask(req.body.updatedTask, req.params.id);
+})
+
+router.delete('/api/data/:id/delete', (req, res) => {
+    task.deleteTask(req.params.id);
 })
 
 module.exports = router;

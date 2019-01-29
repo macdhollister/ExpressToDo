@@ -10,11 +10,15 @@ const task = {
     },
 
     toggleDone: function(id) {
-        orm.updateOne('tasks', 'done', 'NOT done', 'id', id);
+        orm.toggleBool('tasks', 'done', 'done', 'id', parseInt(id));
     },
 
     updateTask: function(newTask, id) {
-        orm.updateOne('tasks', 'task', newTask, 'id', id);
+        orm.updateOne('tasks', 'task', newTask, 'id', parseInt(id));
+    },
+
+    deleteTask: function(id) {
+        orm.deleteOne('tasks', 'id', parseInt(id));
     }
 }
 
