@@ -96,12 +96,6 @@
                 type: 'POST',
                 url: '/api/data',
                 data: {newTask: newTask},
-                success: function(result){
-                    console.log(result.id);//this will alert you the last_id
-                },
-                error: function(err) {
-                    console.log(err);
-                }
             });
 
             location.reload();
@@ -112,7 +106,7 @@
         // delete from database
         $.ajax({
             type: 'DELETE',
-            url: '/api/data/' + $(this).attr('taskid')+'/delete',
+            url: '/api/data/' + $(this).attr('taskid') +'/delete',
         })
         // remove from page
         $(this).parent().parent().remove();
